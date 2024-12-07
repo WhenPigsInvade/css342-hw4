@@ -1,6 +1,6 @@
 #include <vector>
 #include <string>
-#include <time.h>
+#include <sys/time.h>
 #include <iostream>
 #include "sorts.h"
 using namespace std;
@@ -61,6 +61,11 @@ gettimeofday(&start_time, 0);
 // IterativeMergeSort(items, 0, size – 1)
 // ShellSort(items, 0, size – 1)
 // PLACE YOUR CODE HERE; for instance:
+if (sort_name == "InsertionSort")
+{
+    // std::cout << "Insertion Sorting" << std::endl;
+    InsertionSort(items, 0, size - 1);
+}
 if (sort_name == "QuickSort")
 {
     // QuickSort(items, 0, size - 1);
