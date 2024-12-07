@@ -78,7 +78,7 @@ if (sort_name == "MergeSort")
 }
 if (sort_name == "QuickSort")
 {
-    // QuickSort(items, 0, size - 1);
+    QuickSort(items, 0, size - 1);
 }
 gettimeofday(&end_time, 0);
 if (print_out)

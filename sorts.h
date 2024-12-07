@@ -8,14 +8,16 @@
 #include <vector>
 
 
-std::vector<int>& InsertionSort(std::vector<int>& items, int index, int size);
-std::vector<int>& BubbleSort(std::vector<int>& items, int index, int size);
-std::vector<int>& MergeSort(std::vector<int>& items, int index, int size);
-std::vector<int>& MergeSort_(std::vector<int>& items, int left, int right);
+int InsertionSort(std::vector<int>& items, int index, int size);
+int BubbleSort(std::vector<int>& items, int index, int size);
+int MergeSort(std::vector<int>& items, int index, int size);
+int Merge_(std::vector<int>& items, int left, int middle, int right);
+int QuickSort(std::vector<int>& items, int low, int high);
+int Partition_(std::vector<int>& items, int low, int high);
 
 
 
-std::vector<int>& InsertionSort(std::vector<int>& items, int index, int size) {
+int InsertionSort(std::vector<int>& items, int index, int size) {
 
 //  Also works:
 //  for(int i = 1; i <= size; i++) {
@@ -31,10 +33,10 @@ std::vector<int>& InsertionSort(std::vector<int>& items, int index, int size) {
         items[j + 1] = value;
     }
 
-    return items;
+    return 0;
 }
 
-std::vector<int>& BubbleSort(std::vector<int>& items, int index, int size) {
+int BubbleSort(std::vector<int>& items, int index, int size) {
 
     for(int i = 0; i < items.size() - 1; i++) {
 
@@ -49,10 +51,10 @@ std::vector<int>& BubbleSort(std::vector<int>& items, int index, int size) {
 
     }
 
-    return items;
+    return 0;
 }
 
-void Merge_(std::vector<int>& items, int left, int middle, int right) {
+int Merge_(std::vector<int>& items, int left, int middle, int right) {
     int left_size = middle - left + 1;
     int right_size = right - middle;
 
@@ -97,27 +99,60 @@ void Merge_(std::vector<int>& items, int left, int middle, int right) {
         items_index++;
     }
 
+    return 0;
 }
 
-std::vector<int>& MergeSort_(std::vector<int>& items, int left, int right) {
+int MergeSort(std::vector<int>& items, int left, int right) {
     if(left < right) {
         int middle = (left + right) / 2;
 
         // std::cout << left << " " << middle << " " << right << std::endl;
 
-        MergeSort_(items, left, middle);
-        MergeSort_(items, middle + 1, right);
+        MergeSort(items, left, middle);
+        MergeSort(items, middle + 1, right);
 
         Merge_(items, left, middle, right);
     }
 
-    return items;
+    return 0;
 }
 
-std::vector<int>& MergeSort(std::vector<int>& items, int index, int size) {
-    // std::cout << size << " " << items.size() << std::endl;
-    return MergeSort_(items, 0, items.size() - 1);
+
+
+int Partition_(std::vector<int>& items, int low, int high) {
+    int pivot = items[high];
+
+    int index = low - 1;
+
+    for(int i = low; i < high; i++) {
+        if(items[i] <= pivot) {
+            index++;
+            int temp = items[i];
+            items[i] = items[index];
+            items[index] = temp;
+        }
+    }
+
+    int temp = items[index + 1];
+    items[index + 1] = items[high];
+    items[high] = temp;
+
+    return index + 1;
 }
+
+
+int QuickSort(std::vector<int>& items, int low, int high) {
+    if(low < high) {
+        int index = Partition_(items, low, high);
+
+        QuickSort(items, low, index - 1);
+        QuickSort(items, index + 1, high);
+
+    }
+    return 0;
+}
+
+
 
 
 
