@@ -66,6 +66,16 @@ if (sort_name == "InsertionSort")
     // std::cout << "Insertion Sorting" << std::endl;
     InsertionSort(items, 0, size - 1);
 }
+if (sort_name == "BubbleSort")
+{
+    // std::cout << "Bubble Sorting" << std::endl;
+    BubbleSort(items, 0, size - 1);
+}
+if (sort_name == "MergeSort")
+{
+    std::cout << "Merge Sorting" << std::endl;
+    MergeSort(items, 0, size - 1);
+}
 if (sort_name == "QuickSort")
 {
     // QuickSort(items, 0, size - 1);
