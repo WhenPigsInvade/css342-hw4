@@ -14,7 +14,8 @@ int MergeSort(std::vector<int>& items, int index, int size);
 int Merge_(std::vector<int>& items, int left, int middle, int right);
 int QuickSort(std::vector<int>& items, int low, int high);
 int Partition_(std::vector<int>& items, int low, int high);
-
+int ShellSort(std::vector<int>& items, int index, int size);
+int IterativeMergeSort(std::vector<int>& items, int index, int size);
 
 
 int InsertionSort(std::vector<int>& items, int index, int size) {
@@ -117,8 +118,6 @@ int MergeSort(std::vector<int>& items, int left, int right) {
     return 0;
 }
 
-
-
 int Partition_(std::vector<int>& items, int low, int high) {
     int pivot = items[high];
 
@@ -152,7 +151,71 @@ int QuickSort(std::vector<int>& items, int low, int high) {
     return 0;
 }
 
+int ShellSort(std::vector<int>& items, int index, int size) {
+    for(int gap = items.size() / 2; gap > 0; gap--) {
 
+        for(int i = gap; i < items.size(); i++) {
+            int temp = items[i];
+            int j = i;
+            for(; j >= gap && items[j - gap] > temp; j -= gap) {
+                items[j] = items[j - gap];
+            }
+            items[j] = temp;
+        }
+    }
+    return 0;
+}
+
+int IterativeMergeSort(std::vector<int>& items, int index, int size) {
+    std::vector<int> temp(items.size());
+
+    for(int division_size = 1; division_size < items.size(); division_size*=2) {
+        
+        for(int left_index = 0; left_index + division_size < items.size(); left_index += division_size * 2) {
+
+            int mid = left_index + division_size;
+            int end = mid + division_size;
+
+            if(end > items.size()) {
+                end = items.size();
+            }
+
+            int counter = left_index;
+            int left_sub_index = left_index;
+            int right_sub_index = mid;
+
+            while(left_sub_index < mid && right_sub_index < end) {
+                if(items[left_sub_index] > items[right_sub_index]) {
+                    temp[counter] = items[right_sub_index];
+                    right_sub_index++;
+                } else {
+                    temp[counter] = items[left_sub_index];
+                    left_sub_index++;
+                }
+                counter++;
+            }
+
+            while(left_sub_index < mid) {
+                temp[counter] = items[left_sub_index];
+                left_sub_index++;
+                counter++;
+            }
+
+            while(right_sub_index < end) {
+                temp[counter] = items[right_sub_index];
+                right_sub_index++;
+                counter++;
+            }
+
+            for(int i = left_index; i < end; i++) {
+                items[i] = temp[i];
+            }
+
+        }
+    }
+
+    return 0;
+}
 
 
 

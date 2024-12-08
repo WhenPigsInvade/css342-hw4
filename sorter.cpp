@@ -80,6 +80,14 @@ if (sort_name == "QuickSort")
 {
     QuickSort(items, 0, size - 1);
 }
+if (sort_name == "ShellSort")
+{
+    ShellSort(items, 0, size - 1);
+}
+if (sort_name == "IterativeMergeSort")
+{
+    IterativeMergeSort(items, 0, size - 1);
+}
 gettimeofday(&end_time, 0);
 if (print_out)
 {
